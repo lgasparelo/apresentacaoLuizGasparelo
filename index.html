@@ -3,394 +3,252 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. Luiz Gasparelo — CTO CHIP Imaging and Physiology Summit</title>
+<title>Dr. Luiz Gasparelo — Parada cardiorrespiratória, UNIR</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy-deep: #0D1B4C;
-    --navy: #16244D;
-    --navy-light: #223569;
-    --orange: #F2873B;
-    --bg-card: rgba(255,255,255,0.05);
-    --ink: #F4F6FB;
-    --ink-soft: #A9B4D6;
-    --line: rgba(255,255,255,0.14);
+    --green: #009739;
+    --green-deep: #00562B;
+    --green-dark: #003D1F;
+    --yellow: #FEDD00;
+    --blue: #012169;
+    --ink: #1B2A22;
+    --ink-soft: #5A6B62;
+    --line: #E3EBE5;
   }
-
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
   body{
     margin:0;
-    background: radial-gradient(120% 90% at 15% 0%, var(--navy-light), var(--navy-deep) 60%);
     color: var(--ink);
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
+    background: linear-gradient(180deg, var(--green-deep) 0%, var(--green-dark) 100%);
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
   }
+  /* Símbolo do Brasil ao fundo: losango + círculo da bandeira */
+  .bg-symbol{
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .bg-symbol svg{ width: min(135vw, 1100px); height: auto; opacity: .55; }
 
   @media (prefers-reduced-motion: reduce){
-    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    *{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   }
 
-  .wrap{
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 24px 80px;
-    position: relative;
-  }
-
-  .wrap::before{
-    content:"";
-    position: absolute;
-    top: 0; right: -60px;
-    width: 340px; height: 340px;
-    background: radial-gradient(circle, rgba(242,135,59,0.14), transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
+  .wrap{ max-width: 720px; margin: 0 auto; padding: 0 24px 72px; position: relative; z-index: 1; }
 
   /* ---------- HERO ---------- */
-  .hero{
-    padding: 52px 0 20px;
-    position: relative;
-    z-index: 1;
+  .hero{ padding: 52px 0 18px; }
+  .tag{
+    display: inline-block;
+    background: var(--yellow); color: var(--green-dark);
+    font-weight: 700; font-size: 12.5px; letter-spacing: .04em;
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 20px;
   }
-
-  .brand-tag{
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--orange);
-    color: #1A1203;
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.02em;
-    padding: 6px 14px;
-    border-radius: 100px;
-    margin-bottom: 22px;
-  }
-
   .eyebrow{
-    font-family: 'Space Mono', monospace;
-    font-size: 12.5px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 14px;
+    font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .14em;
+    text-transform: uppercase; color: #BFE3CB; margin-bottom: 12px;
   }
-
   h1{
-    font-family: 'Fraunces', serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-size: clamp(26px, 5.2vw, 36px);
-    line-height: 1.24;
-    letter-spacing: -0.01em;
-    margin: 0 0 20px;
-    color: #fff;
+    font-family: 'Fraunces', serif; font-weight: 600;
+    font-size: clamp(30px, 6vw, 44px); line-height: 1.12; letter-spacing: -.01em;
+    margin: 0 0 16px; color: #fff;
   }
-  h1 em{
-    font-style: italic;
-    font-weight: 400;
-    color: var(--orange);
-  }
+  h1 em{ font-style: italic; font-weight: 400; color: var(--yellow); }
+  .subtitle{ font-size: 16px; line-height: 1.6; color: #D5EBDB; max-width: 48ch; margin: 0 0 24px; }
 
-  .subtitle{
-    font-size: 15.5px;
-    line-height: 1.6;
-    color: var(--ink-soft);
-    max-width: 50ch;
-    margin: 0 0 28px;
-  }
-
-  .ecg-holder{
-    width: 100%;
-    height: 60px;
-    margin: 4px 0 8px;
-  }
+  .ecg{ width: 100%; height: 64px; display: block; margin: 4px 0 6px; }
   .ecg-path{
-    fill: none;
-    stroke: var(--orange);
-    stroke-width: 2.2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 900;
-    stroke-dashoffset: 900;
-    animation: draw 2.2s ease-out forwards;
+    fill: none; stroke: var(--yellow); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 2600; stroke-dashoffset: 2600; animation: draw 3.2s ease-out forwards;
   }
   @keyframes draw{ to{ stroke-dashoffset: 0; } }
+  .ecg-legend{
+    display: flex; justify-content: space-between;
+    font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: .08em;
+    text-transform: uppercase; color: #9CCBAC; margin-bottom: 8px;
+  }
 
-  /* ---------- EVENT INFO CARD ---------- */
-  .event-card{
-    background: var(--bg-card);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 24px 26px;
-    margin: 8px 0 40px;
-    position: relative;
-    z-index: 1;
+  /* ---------- FRASE ---------- */
+  .quote{
+    background: var(--blue); border-radius: 8px; padding: 24px 24px; margin: 28px 0 10px;
+    border-left: 5px solid var(--yellow); box-shadow: 0 10px 30px rgba(0,0,0,.28);
+    display: flex; align-items: center; gap: 22px;
   }
-  .event-row{
-    display: flex;
-    gap: 16px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--line);
+  .quote-text{ flex: 1; min-width: 0; }
+  .quote blockquote{
+    margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 400;
+    font-size: clamp(20px, 4.2vw, 26px); line-height: 1.35; color: #fff;
   }
-  .event-row:last-child{ border-bottom: none; padding-bottom: 0; }
-  .event-row:first-child{ padding-top: 0; }
-  .event-label{
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--orange);
-    flex: none;
-    width: 96px;
-    padding-top: 2px;
+  .quote cite{ display: block; margin-top: 14px; font-style: normal; font-size: 13.5px; color: var(--yellow); }
+  .quote-photo{
+    flex: none; width: 96px; height: 120px; object-fit: cover; object-position: 50% 20%;
+    border-radius: 6px; border: 2px solid rgba(255,255,255,.35);
   }
-  .event-value{
-    font-size: 14.5px;
-    line-height: 1.55;
-    color: var(--ink);
-  }
-  .event-value strong{ font-weight: 600; }
+  @media (max-width: 420px){ .quote-photo{ width: 74px; height: 94px; } .quote{ gap: 16px; padding: 20px 18px; } }
 
-  /* ---------- SECTIONS ---------- */
+  /* ---------- SEÇÕES ---------- */
   .section-label{
-    font-family: 'Space Mono', monospace;
-    font-size: 11.5px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin: 40px 0 14px;
-    position: relative;
-    z-index: 1;
+    font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .12em;
+    text-transform: uppercase; color: #BFE3CB; margin: 38px 0 12px;
   }
-
-  .card-grid{
-    display: grid;
-    gap: 12px;
-    position: relative;
-    z-index: 1;
-  }
-
+  .card-grid{ display: grid; gap: 10px; }
   a.card{
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    background: var(--bg-card);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 18px 20px;
-    text-decoration: none;
-    color: var(--ink);
-    transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease;
-    position: relative;
-    overflow: hidden;
+    display: flex; align-items: center; gap: 16px;
+    background: #fff; border-radius: 8px; padding: 16px 18px;
+    text-decoration: none; color: var(--ink);
+    border-bottom: 3px solid transparent;
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,.14);
   }
-  a.card::before{
-    content:"";
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--orange);
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform 0.22s ease;
-  }
-  a.card:hover{
-    border-color: var(--orange);
-    background: rgba(242,135,59,0.08);
-    transform: translateX(2px);
-  }
-  a.card:hover::before{ transform: scaleY(1); }
-  a.card:focus-visible{
-    outline: 2px solid var(--orange);
-    outline-offset: 2px;
-  }
-
+  a.card:hover{ transform: translateY(-2px); border-bottom-color: var(--yellow); box-shadow: 0 8px 20px rgba(0,0,0,.22); }
+  a.card:focus-visible{ outline: 3px solid var(--yellow); outline-offset: 2px; }
   .card-icon{
-    flex: none;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(242,135,59,0.16);
-    color: var(--orange);
+    flex: none; width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,151,57,.12); color: var(--green);
   }
-  .card-icon svg{ width: 18px; height: 18px; }
-
+  .card-icon svg{ width: 19px; height: 19px; }
   .card-text{ flex: 1; min-width: 0; }
-  .card-title{
-    font-weight: 600;
-    font-size: 15.5px;
-    margin: 0 0 2px;
-    color: #fff;
-  }
-  .card-sub{
-    font-size: 13.5px;
-    color: var(--ink-soft);
-    margin: 0;
-  }
+  .card-title{ font-weight: 600; font-size: 15.5px; margin: 0 0 2px; }
+  .card-sub{ font-size: 13.5px; color: var(--ink-soft); margin: 0; }
+  .card-arrow{ flex: none; color: var(--green); font-size: 18px; }
+  .card.hl .card-icon{ background: var(--blue); color: var(--yellow); }
 
-  .card-arrow{
-    flex: none;
-    color: var(--ink-soft);
-    font-size: 18px;
-    opacity: 0.6;
+  /* ---------- DIVULGAÇÃO ---------- */
+  .promo{
+    margin-top: 44px; background: var(--yellow); color: var(--green-dark); border-radius: 10px;
+    padding: 28px 26px 26px; box-shadow: 0 12px 34px rgba(0,0,0,.35); position: relative; overflow: hidden;
   }
+  .promo::after{
+    content:""; position:absolute; right:-60px; top:-60px; width:200px; height:200px; border-radius:50%;
+    background: var(--blue); opacity:.12;
+  }
+  .promo-tag{
+    display:inline-block; background: var(--blue); color:#fff; font-weight:700; font-size:12px;
+    letter-spacing:.06em; text-transform:uppercase; padding:5px 12px; border-radius:100px; margin-bottom:14px;
+  }
+  .promo h2{
+    font-family:'Fraunces',serif; font-weight:600; font-size: clamp(26px, 5.4vw, 34px); line-height:1.15;
+    margin:0 0 12px; color: var(--blue); position:relative;
+  }
+  .promo-info{ font-size:15.5px; line-height:1.6; margin:0 0 16px; color: var(--green-dark); font-weight:500; position:relative; }
+  .promo-box{
+    background: var(--blue); color:#fff; border-radius:8px; padding:14px 16px; font-size:15px; line-height:1.5;
+    margin-bottom:18px; position:relative;
+  }
+  .promo-box strong{ color: var(--yellow); }
+  .promo-btn{
+    display:inline-flex; align-items:center; gap:10px; background: var(--green-dark); color:#fff;
+    font-weight:600; font-size:15px; text-decoration:none; padding:13px 20px; border-radius:8px; position:relative;
+    transition: transform .18s ease, background .18s ease;
+  }
+  .promo-btn:hover{ transform: translateY(-2px); background: var(--green-deep); }
+  .promo-btn:focus-visible{ outline:3px solid var(--blue); outline-offset:2px; }
 
   footer{
-    margin-top: 60px;
-    padding-top: 22px;
-    border-top: 1px solid var(--line);
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    color: var(--ink-soft);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
-    position: relative;
-    z-index: 1;
+    margin-top: 52px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.2);
+    font-family: 'Space Mono', monospace; font-size: 11.5px; color: #A9D4B8;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
   }
 </style>
 </head>
 <body>
+
+<div class="bg-symbol" aria-hidden="true">
+  <svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="500,40 960,350 500,660 40,350" fill="#FEDD00" fill-opacity=".16" stroke="#FEDD00" stroke-opacity=".55" stroke-width="3"/>
+    <circle cx="500" cy="350" r="175" fill="#012169" fill-opacity=".55" stroke="#fff" stroke-opacity=".35" stroke-width="2"/>
+    <path d="M330,372 C450,300 560,300 672,345" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="14" stroke-linecap="round"/>
+  </svg>
+</div>
+
 <div class="wrap">
 
   <div class="hero">
-    <div class="brand-tag">CTO CHIP · Imaging and Physiology Summit</div>
-    <div class="eyebrow">Session 3 · Intracoronary Calcium Management</div>
-    <h1>Identifying and quantifying<br><em>calcium in the coronary arteries.</em></h1>
-    <p class="subtitle">Obrigado por participar da apresentação. Aqui está o PDF da aula e os artigos citados, disponíveis para download.</p>
+    <span class="tag">UNIR · Medicina · 8º período</span>
+    <div class="eyebrow">Suporte básico e avançado de vida</div>
+    <h1>Parada cardiorrespiratória:<br><em>comprima forte, comprima rápido.</em></h1>
+    <p class="subtitle">Obrigado pela aula. Aqui estão o PDF da apresentação, os artigos citados e os contatos para qualquer dúvida.</p>
 
-    <div class="ecg-holder">
-      <svg viewBox="0 0 700 60" width="100%" height="60" preserveAspectRatio="none">
-        <path class="ecg-path" d="M0,32 L30,32 C34,32 36,24 40,24 C44,24 46,32 50,32 L60,32 L64,38 L70,6 L76,46 L82,32 L96,32 C102,32 106,20 114,20 C122,20 126,32 132,32 L260,32 C264,32 266,24 270,24 C274,24 276,32 280,32 L290,32 L294,38 L300,6 L306,46 L312,32 L326,32 C332,32 336,20 344,20 C352,20 356,32 362,32 L490,32 C494,32 496,24 500,24 C504,24 506,32 510,32 L520,32 L524,38 L530,6 L536,46 L542,32 L556,32 C562,32 566,20 574,20 C582,20 586,32 592,32 L700,32" />
-      </svg>
-    </div>
+    <svg class="ecg" viewBox="0 0 700 60" preserveAspectRatio="none" role="img" aria-label="Traçado de fibrilação ventricular evoluindo para ritmo sinusal organizado">
+      <path class="ecg-path" d="M0,32.4 L2,30.7 L4,29.0 L6,31.2 L8,31.3 L10,32.5 L12,33.3 L14,31.7 L16,32.5 L18,32.4 L20,35.7 L22,39.5 L24,43.2 L26,45.8 L28,48.6 L30,46.6 L32,41.2 L34,34.8 L36,30.7 L38,28.5 L40,27.5 L42,32.4 L44,34.2 L46,38.5 L48,40.0 L50,39.3 L52,37.2 L54,34.9 L56,37.0 L58,38.1 L60,40.8 L62,43.2 L64,42.0 L66,39.3 L68,33.3 L70,26.7 L72,21.1 L74,20.7 L76,23.7 L78,28.5 L80,35.2 L82,40.9 L84,42.7 L86,43.5 L88,43.7 L90,41.5 L92,40.9 L94,40.3 L96,41.3 L98,42.6 L100,39.9 L102,39.3 L104,34.8 L106,30.0 L108,28.6 L110,26.8 L112,29.2 L114,30.8 L116,34.3 L118,38.0 L120,39.1 L122,40.6 L124,38.3 L126,36.8 L128,35.4 L130,35.3 L132,35.0 L134,35.8 L136,37.4 L138,36.2 L140,35.6 L142,31.4 L144,29.5 L146,28.6 L148,31.7 L150,38.0 L152,43.7 L154,48.0 L156,51.7 L158,49.2 L160,45.4 L162,39.4 L164,33.9 L166,28.5 L168,28.8 L170,29.0 L172,29.4 L174,28.2 L176,28.8 L178,26.0 L180,24.7 L182,25.2 L184,29.5 L186,35.8 L188,44.2 L190,49.3 L192,51.5 L194,48.7 L196,44.0 L198,40.2 L200,35.3 L202,32.4 L204,32.0 L206,32.8 L208,34.4 L210,36.4 L212,37.0 L214,35.1 L216,34.2 L218,33.4 L220,33.5 L222,36.2 L224,38.7 L226,39.7 L228,39.5 L230,39.0 L232,35.5 L234,33.7 L236,32.4 L238,32.3 L240,33.4 L242,34.6 L244,35.7 L246,36.1 L248,36.3 L250,36.0 L252,35.1 L254,35.8 L256,36.6 L258,37.1 L260,37.2 L262,36.7 L264,36.0 L266,35.2 L268,34.8 L270,34.9 L272,35.5 L274,36.3 L276,36.9 L278,37.2 L280,37.0 L282,36.3 L284,35.5 L286,34.9 L288,34.8 L290,35.2 L292,35.9 L294,36.7 L296,37.1 L298,37.1 L300,36.6 L302,32.2 L303,32.0 L304,32.0 L305,32.0 L306,32.2 L307,32.4 L308,32.7 L309,33.0 L310,33.4 L311,33.8 L312,34.1 L313,34.5 L314,34.8 L315,35.0 L316,35.3 L317,35.5 L318,35.6 L319,35.7 L320,35.9 L321,36.3 L322,37.4 L323,39.0 L324,39.9 L325,38.9 L326,36.3 L327,31.9 L328,24.1 L329,14.6 L330,10.0 L331,14.8 L332,25.0 L333,34.3 L334,40.4 L335,42.7 L336,41.4 L337,38.6 L338,36.6 L339,35.7 L340,35.4 L341,35.2 L342,35.1 L343,34.8 L344,34.6 L345,34.3 L346,33.9 L347,33.5 L348,33.1 L349,32.7 L350,32.2 L351,31.8 L352,31.3 L353,30.8 L354,30.4 L355,30.0 L356,29.7 L357,29.4 L358,29.2 L359,29.0 L360,29.0 L361,29.0 L362,29.2 L363,29.4 L364,29.7 L365,30.0 L366,30.4 L367,30.8 L368,31.3 L369,31.8 L370,32.2 L371,32.7 L372,33.1 L373,33.5 L374,33.9 L375,34.3 L376,34.6 L377,34.8 L378,35.1 L379,35.2 L380,35.4 L381,35.5 L382,35.6 L383,35.7 L384,35.8 L385,35.8 L386,35.8 L387,35.8 L388,35.8 L389,35.7 L390,35.6 L391,35.4 L392,35.3 L393,35.0 L394,34.8 L395,34.5 L396,34.1 L397,33.8 L398,33.4 L399,33.0 L400,32.7 L401,32.4 L402,32.2 L403,32.0 L404,32.0 L405,32.0 L406,32.2 L407,32.4 L408,32.7 L409,33.0 L410,33.4 L411,33.8 L412,34.1 L413,34.5 L414,34.8 L415,35.0 L416,35.3 L417,35.5 L418,35.6 L419,35.7 L420,35.9 L421,36.3 L422,37.4 L423,39.0 L424,39.9 L425,38.9 L426,36.3 L427,31.9 L428,24.1 L429,14.6 L430,10.0 L431,14.8 L432,25.0 L433,34.3 L434,40.4 L435,42.7 L436,41.4 L437,38.6 L438,36.6 L439,35.7 L440,35.4 L441,35.2 L442,35.1 L443,34.8 L444,34.6 L445,34.3 L446,33.9 L447,33.5 L448,33.1 L449,32.7 L450,32.2 L451,31.8 L452,31.3 L453,30.8 L454,30.4 L455,30.0 L456,29.7 L457,29.4 L458,29.2 L459,29.0 L460,29.0 L461,29.0 L462,29.2 L463,29.4 L464,29.7 L465,30.0 L466,30.4 L467,30.8 L468,31.3 L469,31.8 L470,32.2 L471,32.7 L472,33.1 L473,33.5 L474,33.9 L475,34.3 L476,34.6 L477,34.8 L478,35.1 L479,35.2 L480,35.4 L481,35.5 L482,35.6 L483,35.7 L484,35.8 L485,35.8 L486,35.8 L487,35.8 L488,35.8 L489,35.7 L490,35.6 L491,35.4 L492,35.3 L493,35.0 L494,34.8 L495,34.5 L496,34.1 L497,33.8 L498,33.4 L499,33.0 L500,32.7 L501,32.4 L502,32.2 L503,32.0 L504,32.0 L505,32.0 L506,32.2 L507,32.4 L508,32.7 L509,33.0 L510,33.4 L511,33.8 L512,34.1 L513,34.5 L514,34.8 L515,35.0 L516,35.3 L517,35.5 L518,35.6 L519,35.7 L520,35.9 L521,36.3 L522,37.4 L523,39.0 L524,39.9 L525,38.9 L526,36.3 L527,31.9 L528,24.1 L529,14.6 L530,10.0 L531,14.8 L532,25.0 L533,34.3 L534,40.4 L535,42.7 L536,41.4 L537,38.6 L538,36.6 L539,35.7 L540,35.4 L541,35.2 L542,35.1 L543,34.8 L544,34.6 L545,34.3 L546,33.9 L547,33.5 L548,33.1 L549,32.7 L550,32.2 L551,31.8 L552,31.3 L553,30.8 L554,30.4 L555,30.0 L556,29.7 L557,29.4 L558,29.2 L559,29.0 L560,29.0 L561,29.0 L562,29.2 L563,29.4 L564,29.7 L565,30.0 L566,30.4 L567,30.8 L568,31.3 L569,31.8 L570,32.2 L571,32.7 L572,33.1 L573,33.5 L574,33.9 L575,34.3 L576,34.6 L577,34.8 L578,35.1 L579,35.2 L580,35.4 L581,35.5 L582,35.6 L583,35.7 L584,35.8 L585,35.8 L586,35.8 L587,35.8 L588,35.8 L589,35.7 L590,35.6 L591,35.4 L592,35.3 L593,35.0 L594,34.8 L595,34.5 L596,34.1 L597,33.8 L598,33.4 L599,33.0 L600,32.7 L601,32.4 L602,32.2 L603,32.0 L604,32.0 L605,32.0 L606,32.2 L607,32.4 L608,32.7 L609,33.0 L610,33.4 L611,33.8 L612,34.1 L613,34.5 L614,34.8 L615,35.0 L616,35.3 L617,35.5 L618,35.6 L619,35.7 L620,35.9 L621,36.3 L622,37.4 L623,39.0 L624,39.9 L625,38.9 L626,36.3 L627,31.9 L628,24.1 L629,14.6 L630,10.0 L631,14.8 L632,25.0 L633,34.3 L634,40.4 L635,42.7 L636,41.4 L637,38.6 L638,36.6 L639,35.7 L640,35.4 L641,35.2 L642,35.1 L643,34.8 L644,34.6 L645,34.3 L646,33.9 L647,33.5 L648,33.1 L649,32.7 L650,32.2 L651,31.8 L652,31.3 L653,30.8 L654,30.4 L655,30.0 L656,29.7 L657,29.4 L658,29.2 L659,29.0 L660,29.0 L661,29.0 L662,29.2 L663,29.4 L664,29.7 L665,30.0 L666,30.4 L667,30.8 L668,31.3 L669,31.8 L670,32.2 L671,32.7 L672,33.1 L673,33.5 L674,33.9 L675,34.3 L676,34.6 L677,34.8 L678,35.1 L679,35.2 L680,35.4 L681,35.5 L682,35.6 L683,35.7 L684,35.8 L685,35.8 L686,35.8 L687,35.8 L688,35.8 L689,35.7 L690,35.6 L691,35.4 L692,35.3 L693,35.0 L694,34.8 L695,34.5 L696,34.1 L697,33.8 L698,33.4 L699,33.0 L700,32.7" />
+    </svg>
+    <div class="ecg-legend"><span>Fibrilação ventricular</span><span>Retorno da circulação espontânea</span></div>
   </div>
 
-  <div class="event-card">
-    <div class="event-row">
-      <span class="event-label">Palestrante</span>
-      <span class="event-value">
-        <strong>Luiz Henrique Gasparelo, MD</strong><br>
-        Instituto do Coração de Rondônia (ICR), Porto Velho, Brazil<br>
-        Universidade Federal de Rondônia (UNIR), Porto Velho, Brazil
-      </span>
+  <div class="quote">
+    <div class="quote-text">
+      <blockquote>“Insanidade é fazer a mesma coisa repetidamente e esperar resultados diferentes.”</blockquote>
+      <cite>Frase atribuída a Albert Einstein</cite>
     </div>
-    <div class="event-row">
-      <span class="event-label">Evento</span>
-      <span class="event-value">CTO CHIP Imaging and Physiology Summit — 18–19 de outubro de 2026</span>
-    </div>
+    <img class="quote-photo" src="https://commons.wikimedia.org/wiki/Special:FilePath/Einstein_1921_by_F_Schmutzer_-_restoration.jpg?width=320" alt="Albert Einstein" loading="lazy" onerror="this.style.display='none'">
   </div>
 
-  <div class="section-label">Material da apresentação</div>
+  <div class="section-label">Material da aula</div>
   <div class="card-grid">
-    <a class="card" href="https://drive.google.com/file/d/1KIe1cWlmnNvbtFgBuFtstvOw6tVEHG4b/view?usp=sharing" target="_blank" rel="noopener">
-      <span class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
-      </span>
-      <span class="card-text">
-        <p class="card-title">Baixar PDF da apresentação</p>
-        <p class="card-sub">Identifying and Quantifying Calcium in the Coronary Arteries</p>
-      </span>
+    <a class="card hl" href="ACLS_UNIR_2026.pdf" target="_blank" rel="noopener">
+      <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg></span>
+      <span class="card-text"><p class="card-title">Baixar PDF da apresentação</p><p class="card-sub">Slides da aula de PCR</p></span>
       <span class="card-arrow">→</span>
     </a>
-
-    <a class="card" href="https://drive.google.com/drive/folders/12Fw7Q6xILA3LiNilyjyM8IG1OEjRN0n9?usp=sharing" target="_blank" rel="noopener">
-      <span class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
-      </span>
-      <span class="card-text">
-        <p class="card-title">Artigos citados</p>
-        <p class="card-sub">Pasta completa no Google Drive</p>
-      </span>
+        <a class="card" href="https://drive.google.com/drive/folders/1KVQeiH16HXcodM2RYBqFsH3W9mdP8qS_?usp=sharing" target="_blank" rel="noopener">
+      <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg></span>
+      <span class="card-text"><p class="card-title">Artigos e arquivos</p><p class="card-sub">Pasta no Google Drive</p></span>
       <span class="card-arrow">→</span>
     </a>
   </div>
 
-  <div class="section-label">Canais oficiais</div>
+  <div class="section-label">Sites</div>
   <div class="card-grid">
-    <a class="card" href="https://www.institutodocoracao.ro" target="_blank" rel="noopener">
-      <span class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
-      </span>
-      <span class="card-text">
-        <p class="card-title">Instituto do Coração de Rondônia</p>
-        <p class="card-sub">institutodocoracao.ro</p>
-      </span>
-      <span class="card-arrow">→</span>
-    </a>
-
     <a class="card" href="https://www.drluizgasparelocardiologista.com" target="_blank" rel="noopener">
-      <span class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
-      </span>
-      <span class="card-text">
-        <p class="card-title">Dr. Luiz Gasparelo — Cardiologista</p>
-        <p class="card-sub">drluizgasparelocardiologista.com</p>
-      </span>
+      <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M2.5 12h19M12 2.5c2.5 2.6 3.8 5.9 3.8 9.5s-1.3 6.9-3.8 9.5c-2.5-2.6-3.8-5.9-3.8-9.5s1.3-6.9 3.8-9.5z"/></svg></span>
+      <span class="card-text"><p class="card-title">Dr. Luiz Gasparelo, Cardiologista</p><p class="card-sub">drluizgasparelocardiologista.com</p></span>
       <span class="card-arrow">→</span>
     </a>
-
-    <a class="card" href="https://www.instagram.com/drluizgasparelo" target="_blank" rel="noopener">
-      <span class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>
-      </span>
-      <span class="card-text">
-        <p class="card-title">@drluizgasparelo</p>
-        <p class="card-sub">Instagram</p>
-      </span>
+        <a class="card" href="https://www.institutodocoracao.ro" target="_blank" rel="noopener">
+      <span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.6-9-9.5C1.8 7.6 4.3 4 7.8 4c2 0 3.4 1 4.2 2.4C12.8 5 14.2 4 16.2 4c3.5 0 6 3.6 4.8 7.500C19 16.4 12 21 12 21z"/></svg></span>
+      <span class="card-text"><p class="card-title">Instituto do Coração de Rondônia</p><p class="card-sub">institutodocoracao.ro</p></span>
       <span class="card-arrow">→</span>
     </a>
   </div>
 
   <div class="section-label">Fale comigo</div>
   <div class="card-grid">
-    <a class="card" href="https://wa.me/5569993084262?text=Ol%C3%A1%2C%20vim%20do%20CTO%20CHIP%20Summit" target="_blank" rel="noopener">
-      <span class="card-icon">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.7 14.2c-.2.7-1.4 1.4-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.9-1.3-4.8-4.2-5-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5.2.5.8 1.9.8 2 .1.2.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.5.5-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.6.7 1.8.9.2.1.4.2.4.3.1.2.1.7-.1 1.2z"/></svg>
-      </span>
-      <span class="card-text">
-        <p class="card-title">WhatsApp — Dr. Luiz Gasparelo</p>
-        <p class="card-sub">(69) 99308-4262</p>
-      </span>
+    <a class="card" href="https://wa.me/5569992022215?text=Ol%C3%A1%2C%20vim%20da%20aula%20de%20parada%20cardiorrespirat%C3%B3ria%20da%20UNIR" target="_blank" rel="noopener">
+      <span class="card-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.7 14.2c-.2.7-1.4 1.4-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.9-1.3-4.8-4.2-5-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5.2.5.8 1.9.8 2 .1.2.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.5.5-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.6.7 1.8.9.2.1.4.2.4.3.1.2.1.7-.1 1.2z"/></svg></span>
+      <span class="card-text"><p class="card-title">Secretaria</p><p class="card-sub">(69) 99202-2215</p></span>
       <span class="card-arrow">→</span>
     </a>
-
-    <a class="card" href="https://wa.me/5569992130387" target="_blank" rel="noopener">
-      <span class="card-icon">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.7 14.2c-.2.7-1.4 1.4-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.9-1.3-4.8-4.2-5-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5.2.5.8 1.9.8 2 .1.2.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.5.5-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.6.7 1.8.9.2.1.4.2.4.3.1.2.1.7-.1 1.2z"/></svg>
-      </span>
-      <span class="card-text">
-        <p class="card-title">Instituto do Coração de Rondônia</p>
-        <p class="card-sub">(69) 99213-0387</p>
-      </span>
+    <a class="card" href="https://wa.me/5569992571048" target="_blank" rel="noopener">
+      <span class="card-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.7 14.2c-.2.7-1.4 1.4-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.9-1.3-4.8-4.2-5-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5.2.5.8 1.9.8 2 .1.2.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.5.5-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.6.7 1.8.9.2.1.4.2.4.3.1.2.1.7-.1 1.2z"/></svg></span>
+      <span class="card-text"><p class="card-title">Consultório, Dr. Luiz Gasparelo</p><p class="card-sub">(69) 99257-1048</p></span>
       <span class="card-arrow">→</span>
     </a>
-
-    <a class="card" href="mailto:lgasparelo@gmail.com">
-      <span class="card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-      </span>
-      <span class="card-text">
-        <p class="card-title">E-mail</p>
-        <p class="card-sub">lgasparelo@gmail.com</p>
-      </span>
+        <a class="card" href="https://wa.me/5569992130387" target="_blank" rel="noopener">
+      <span class="card-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.7 14.2c-.2.7-1.4 1.4-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.9-1.3-4.8-4.2-5-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5.2.5.8 1.9.8 2 .1.2.1.3 0 .5-.1.2-.1.3-.3.5-.1.2-.3.4-.5.5-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.6.7 1.8.9.2.1.4.2.4.3.1.2.1.7-.1 1.2z"/></svg></span>
+      <span class="card-text"><p class="card-title">Instituto do Coração de Rondônia</p><p class="card-sub">(69) 99213-0387</p></span>
       <span class="card-arrow">→</span>
     </a>
   </div>
 
+  <section class="promo" aria-label="Divulgação do congresso">
+    <span class="promo-tag">Convite · SOCERON</span>
+    <h2>IX Congresso Rondoniense de Cardiologia</h2>
+    <p class="promo-info">28 a 30 de novembro de 2026<br>Assembleia Legislativa de Rondônia, Porto Velho</p>
+    <div class="promo-box"><strong>Alunos associados ao CAMUFRO têm desconto na inscrição.</strong> Fale com a diretoria.</div>
+    <a class="promo-btn" href="https://soceron.com.br" target="_blank" rel="noopener">Inscrições e programação em soceron.com.br <span aria-hidden="true">→</span></a>
+  </section>
+
   <footer>
-    <span>Luiz Henrique Gasparelo, MD</span>
-    <span>Instituto do Coração de Rondônia · Porto Velho, RO</span>
+    <span>Luiz Henrique Gasparelo, MD · CRM-RO 3143</span>
+    <span>Professor de Medicina, UNIR · Porto Velho, RO</span>
   </footer>
 
 </div>
